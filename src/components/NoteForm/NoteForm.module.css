@@ -1,0 +1,34 @@
+.addNoteFormContainer {
+  margin: 1% auto 1% 50%;
+  padding: 0.3% 1%;
+  width: 470px;
+  text-align: left;
+}
+.addNoteFormContainerExpanded {
+  min-height: auto;
+}
+.addNoteFormContainerNotExpanded {
+  min-height: 40px;
+}
+.addNoteForm {
+  display: flex;
+  flex-direction: column;
+  padding:2%;
+}
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 1%;
+}
+.button {
+  background-color: white !important;
+  color: black !important;
+  text-transform: none !important;
+}
+.titleTextField,
+.noteContentTextField {
+  margin-bottom: 3% !important;
+  border : none !important;
+}
+
