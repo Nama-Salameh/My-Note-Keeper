@@ -1,0 +1,11 @@
+.headerContainer {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px rgb(229, 228, 228) solid;
+    padding: 0 0.7%;
+}
+.title{
+    font-size: 22px;
+    font-weight: normal !important;
+    margin-right: 1%;
+}
