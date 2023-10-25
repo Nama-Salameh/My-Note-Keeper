@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import style from "./NoteForm.module.css";
 import { v4 as uuidv4 } from "uuid";
+
 const NoteForm = () => {
   const [isExpanded, setExpanded] = useState(false);
   const [title, setTitle] = useState("");
