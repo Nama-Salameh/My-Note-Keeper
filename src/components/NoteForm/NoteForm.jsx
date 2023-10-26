@@ -34,7 +34,7 @@ const NoteForm = () => {
   };
 
   const handleSaveClick = () => {
-    if (title.trim() === "" || content.trim() === "") {
+    if (title.trim() === "" && content.trim() === "") {
       setExpanded(false);
       return;
     }
