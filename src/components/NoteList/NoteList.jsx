@@ -13,7 +13,7 @@ const NoteList = ({ searchText }) => {
   });
 
   return (
-    <div className={style.notesContainer} style={{ marginTop: "1rem" }}>
+    <div className={style.notesContainer}>
       {filteredNotes.map((note , index) => (
         <Note key={note.id} note={note}  backgroundColor={backgroundColors[index % backgroundColors.length]}/>
       ))}
