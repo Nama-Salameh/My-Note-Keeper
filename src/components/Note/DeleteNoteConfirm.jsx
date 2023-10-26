@@ -2,13 +2,13 @@ import React from "react";
 import { Modal, Button, Typography } from "@mui/material";
 import style from "./Note.module.css";
 
-const NoteModal = ({
-  isModalOpen,
-  handleCloseModal,
+const DeleteNoteConfirm = ({
+  isDeleteModalOpen,
+  handleCloseDeletionModal,
   handleDeleteNote,
 }) => {
   return (
-    <Modal open={isModalOpen} onClose={handleCloseModal}>
+    <Modal open={isDeleteModalOpen} onClose={handleCloseDeletionModal}>
       <div className={style.modalContent}>
         <Typography variant="h6">Note Deletion</Typography>
         <Typography>Are you certain you wish to delete this note?</Typography>
@@ -18,7 +18,7 @@ const NoteModal = ({
             color="grey"
             onClick={(e) => {
               e.stopPropagation();
-              handleCloseModal();
+              handleCloseDeletionModal();
             }}
             className={style.cancelButton}
           >
@@ -41,4 +41,4 @@ const NoteModal = ({
   );
 };
 
-export default NoteModal;
+export default DeleteNoteConfirm;

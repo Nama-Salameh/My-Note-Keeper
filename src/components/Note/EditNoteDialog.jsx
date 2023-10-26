@@ -1,8 +1,15 @@
-import { Dialog, Button} from "@mui/material";
-import {useState, useEffect} from 'react';
+import { Dialog, Button } from "@mui/material";
+import { useState, useEffect } from "react";
 import style from "./Note.module.css";
 
-const EditNoteDialog = ({ isDialogOpen, handleCloseDialog,  editedNote, setEditedNote, handleUpdateNote, note }) => {
+const EditNoteDialog = ({
+  isEditDialogOpen,
+  handleCloseEditingDialog,
+  editedNote,
+  setEditedNote,
+  handleUpdateNote,
+  note,
+}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
@@ -10,15 +17,15 @@ const EditNoteDialog = ({ isDialogOpen, handleCloseDialog,  editedNote, setEdite
   }, [editedNote.title, editedNote.content]);
 
   const handleTitleChange = (e) => {
-    setEditedNote({ ...editedNote, title: e.target.value});
+    setEditedNote({ ...editedNote, title: e.target.value });
   };
 
   const handleContentChange = (e) => {
-    setEditedNote({ ...editedNote, content: e.target.value});
+    setEditedNote({ ...editedNote, content: e.target.value });
   };
 
   return (
-    <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
+    <Dialog open={isEditDialogOpen} onClose={handleCloseEditingDialog}>
       <div className={style.dialogContent}>
         <input
           type="text"
@@ -35,7 +42,7 @@ const EditNoteDialog = ({ isDialogOpen, handleCloseDialog,  editedNote, setEdite
         <p className={style.taskDate}>{note.date}</p>
         <div className={style.buttonsContainer}>
           <Button
-            onClick={handleCloseDialog}
+            onClick={handleCloseEditingDialog}
             className={style.cancelEditionButton}
           >
             Cancel
@@ -48,6 +55,5 @@ const EditNoteDialog = ({ isDialogOpen, handleCloseDialog,  editedNote, setEdite
     </Dialog>
   );
 };
-
 
 export default EditNoteDialog;

@@ -4,11 +4,11 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { useNotesDispatch } from "../NoteContext";
 import EditNoteDialog from "./EditNoteDialog";
-import NoteModal from "./NoteModal";
+import DeleteNoteConfirm from "./DeleteNoteConfirm";
 const Note = ({ note, backgroundColor }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isEditDialogOpen, setEditDialogOpen] = useState(false);
   const [editedNote, setEditedNote] = useState({
     title: note.title,
     content: note.content,
@@ -16,12 +16,12 @@ const Note = ({ note, backgroundColor }) => {
   });
   const dispatch = useNotesDispatch();
 
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
+  const handleOpenEditingDialog = () => {
+    setEditDialogOpen(true);
   };
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
+  const handleCloseEditingDialog = () => {
+    setEditDialogOpen(false);
   };
 
   const handleMouseEnter = () => {
@@ -32,12 +32,12 @@ const Note = ({ note, backgroundColor }) => {
     setIsHovered(false);
   };
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
+  const handleOpenDeletionModal = () => {
+    setDeleteModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const handleCloseDeletionModal = () => {
+    setDeleteModalOpen(false);
   };
 
   const handleDeleteNote = () => {
@@ -45,7 +45,7 @@ const Note = ({ note, backgroundColor }) => {
       type: "delete",
       id: note.id,
     });
-    setModalOpen(false);
+    setDeleteModalOpen(false);
   };
 
   const handleUpdateNote = () => {
@@ -56,7 +56,7 @@ const Note = ({ note, backgroundColor }) => {
       content: editedNote.content,
       date : editedNote.date,
     });
-    setDialogOpen(false);
+    setEditDialogOpen(false);
   };
 
   return (
@@ -66,7 +66,7 @@ const Note = ({ note, backgroundColor }) => {
       style={{ backgroundColor: note.backgroundColor || backgroundColor }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleOpenDialog}
+      onClick={handleOpenEditingDialog}
     >
       <Typography variant="h6">{note.title}</Typography>
       <Typography variant="body1">{note.content}</Typography>
@@ -76,26 +76,27 @@ const Note = ({ note, backgroundColor }) => {
           <FaTrash
             onClick={(e) => {
               e.stopPropagation();
-              handleOpenModal();
+              handleOpenDeletionModal();
             }}
           />
         </div>
       )}
 
-      <NoteModal
-        isModalOpen={isModalOpen}
-        handleCloseModal={handleCloseModal}
+      <DeleteNoteConfirm
+        isDeleteModalOpen={isDeleteModalOpen}
+        handleCloseDeletionModal={handleCloseDeletionModal}
         handleDeleteNote={handleDeleteNote}
         note={note}
       />
+      {isEditDialogOpen && 
       <EditNoteDialog
-        isDialogOpen={isDialogOpen}
-        handleCloseDialog={handleCloseDialog}
+        isEditDialogOpen={isEditDialogOpen}
+        handleCloseEditingDialog={handleCloseEditingDialog}
         editedNote={editedNote}
         setEditedNote={setEditedNote}
         handleUpdateNote={handleUpdateNote}
         note={note}
-      />
+      />}
     </Paper>
   );
 };
