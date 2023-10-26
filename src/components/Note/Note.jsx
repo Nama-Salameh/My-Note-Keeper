@@ -9,9 +9,10 @@ const Note = ({ note, backgroundColor }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(note.title);
-  const [editedContent, setEditedContent] = useState(note.content);
-
+  const [editedNote, setEditedNote] = useState({
+    title: note.title,
+    content: note.content,
+  });
   const dispatch = useNotesDispatch();
 
   const handleOpenDialog = () => {
@@ -50,8 +51,8 @@ const Note = ({ note, backgroundColor }) => {
     dispatch({
       type: "update",
       id: note.id,
-      title: editedTitle,
-      content: editedContent,
+      title: editedNote.title,
+      content: editedNote.content,
     });
     setDialogOpen(false);
   };
@@ -88,10 +89,8 @@ const Note = ({ note, backgroundColor }) => {
       <EditNoteDialog
         isDialogOpen={isDialogOpen}
         handleCloseDialog={handleCloseDialog}
-        editedTitle={editedTitle}
-        setEditedTitle={setEditedTitle}
-        editedContent={editedContent}
-        setEditedContent={setEditedContent}
+        editedNote={editedNote}
+        setEditedNote={setEditedNote}
         handleUpdateNote={handleUpdateNote}
         note={note}
       />
