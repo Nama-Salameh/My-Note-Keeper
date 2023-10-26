@@ -5,6 +5,8 @@ import { FaTrash } from "react-icons/fa";
 import { useNotesDispatch } from "../NoteContext";
 import EditNoteDialog from "./EditNoteDialog";
 import DeleteNoteConfirm from "./DeleteNoteConfirm";
+import Linkify from "react-linkify"; // Import react-linkify
+
 const Note = ({ note, backgroundColor }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -54,7 +56,7 @@ const Note = ({ note, backgroundColor }) => {
       id: note.id,
       title: editedNote.title,
       content: editedNote.content,
-      date : editedNote.date,
+      date: editedNote.date,
     });
     setEditDialogOpen(false);
   };
@@ -69,7 +71,9 @@ const Note = ({ note, backgroundColor }) => {
       onClick={handleOpenEditingDialog}
     >
       <Typography variant="h6">{note.title}</Typography>
-      <Typography variant="body1">{note.content}</Typography>
+      <Typography variant="body1">
+        <Linkify>{note.content}</Linkify>
+      </Typography>
       <p className={style.taskDate}>{note.date}</p>
       {isHovered && (
         <div className={style.trashIcon}>
@@ -88,15 +92,16 @@ const Note = ({ note, backgroundColor }) => {
         handleDeleteNote={handleDeleteNote}
         note={note}
       />
-      {isEditDialogOpen && 
-      <EditNoteDialog
-        isEditDialogOpen={isEditDialogOpen}
-        handleCloseEditingDialog={handleCloseEditingDialog}
-        editedNote={editedNote}
-        setEditedNote={setEditedNote}
-        handleUpdateNote={handleUpdateNote}
-        note={note}
-      />}
+      {isEditDialogOpen && (
+        <EditNoteDialog
+          isEditDialogOpen={isEditDialogOpen}
+          handleCloseEditingDialog={handleCloseEditingDialog}
+          editedNote={editedNote}
+          setEditedNote={setEditedNote}
+          handleUpdateNote={handleUpdateNote}
+          note={note}
+        />
+      )}
     </Paper>
   );
 };
