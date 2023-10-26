@@ -12,6 +12,7 @@ const Note = ({ note, backgroundColor }) => {
   const [editedNote, setEditedNote] = useState({
     title: note.title,
     content: note.content,
+    date: note.date,
   });
   const dispatch = useNotesDispatch();
 
@@ -53,6 +54,7 @@ const Note = ({ note, backgroundColor }) => {
       id: note.id,
       title: editedNote.title,
       content: editedNote.content,
+      date : editedNote.date,
     });
     setDialogOpen(false);
   };

@@ -1,7 +1,14 @@
 import { Dialog, Button} from "@mui/material";
+import {useState, useEffect} from 'react';
 import style from "./Note.module.css";
 
 const EditNoteDialog = ({ isDialogOpen, handleCloseDialog,  editedNote, setEditedNote, handleUpdateNote, note }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  useEffect(() => {
+    setCurrentDate(new Date());
+  }, [editedNote.title, editedNote.content]);
+
   const handleTitleChange = (e) => {
     setEditedNote({ ...editedNote, title: e.target.value});
   };

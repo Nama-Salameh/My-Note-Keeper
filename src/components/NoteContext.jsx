@@ -39,7 +39,12 @@ const notesReducer = (notes, action) => {
     case "update": {
       return notes.map((note) => {
         if (note.id === action.id) {
-          return { ...note, title: action.title, content: action.content };
+          return {
+            ...note,
+            title: action.title,
+            content: action.content,
+            date: action.date,
+          };
         }
         return note;
       });
