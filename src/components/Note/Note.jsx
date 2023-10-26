@@ -71,7 +71,7 @@ const Note = ({ note, backgroundColor }) => {
       onClick={handleOpenEditingDialog}
     >
       <Typography variant="h6">{note.title}</Typography>
-      <Typography variant="body1">
+      <Typography variant="body1" className={style.content}>
         <Linkify>{note.content}</Linkify>
       </Typography>
       <p className={style.taskDate}>{note.date}</p>

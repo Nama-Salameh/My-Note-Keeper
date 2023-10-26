@@ -12,7 +12,6 @@ const SearchBar = ({ onSearchChange }) => {
     onSearchChange(text);
   };
 
-
   return (
     <TextField
       variant="outlined"
