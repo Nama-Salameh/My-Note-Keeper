@@ -13,7 +13,7 @@
 .addNoteForm {
   display: flex;
   flex-direction: column;
-  padding:2%;
+  padding: 2%;
 }
 .buttonsContainer {
   display: flex;
@@ -21,7 +21,8 @@
   justify-content: end;
   gap: 1%;
 }
-.button {
+.saveButton,
+.closeButton {
   background-color: white !important;
   color: black !important;
   text-transform: none !important;
@@ -29,6 +30,5 @@
 .titleTextField,
 .noteContentTextField {
   margin-bottom: 3% !important;
-  border : none !important;
+  border: none !important;
 }
-

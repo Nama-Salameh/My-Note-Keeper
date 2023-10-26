@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNotesDispatch } from '../NoteContext.jsx';
+import { useNotesDispatch } from "../NoteContext.jsx";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
@@ -12,14 +12,10 @@ const NoteForm = () => {
   const [content, setContent] = useState("");
   const dispatch = useNotesDispatch();
 
-  const noteColors = ['white', 'orange', 'yellow'];
-  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+  function generateUniqueId() {
+    return uuidv4();
+  }
 
-
-function generateUniqueId() {
-  return uuidv4();
-}
-  
   const handleNoteClick = () => {
     if (!isExpanded) {
       setExpanded(true);
@@ -36,7 +32,7 @@ function generateUniqueId() {
     const currentDate = new Date();
     const id = generateUniqueId();
     dispatch({
-      type :"add",
+      type: "add",
       id,
       title,
       content,
@@ -46,7 +42,6 @@ function generateUniqueId() {
     setTitle("");
     setContent("");
     setExpanded(false);
-    setCurrentColorIndex((currentColorIndex + 1) % noteColors.length);
   };
 
   return (
@@ -55,8 +50,8 @@ function generateUniqueId() {
       onClick={handleNoteClick}
       className={`${style.addNoteFormContainer} ${
         isExpanded
-          ? style.additionalExpandedClass
-          : style.additionalNotExpandedClass
+          ? style.addNoteFormContainerExpanded
+          : style.addNoteFormContainerNotExpanded
       }`}
     >
       {isExpanded ? (
@@ -81,7 +76,7 @@ function generateUniqueId() {
               variant="contained"
               color="primary"
               onClick={handleSaveClick}
-              className={style.button}
+              className={style.saveButton}
             >
               Save
             </Button>
@@ -89,7 +84,7 @@ function generateUniqueId() {
               variant="contained"
               color="primary"
               onClick={handleCancelClick}
-              className={style.button}
+              className={style.closeButton}
             >
               Close
             </Button>
