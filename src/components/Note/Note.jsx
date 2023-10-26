@@ -1,9 +1,10 @@
-import { Paper, Typography, Modal, Button, Dialog } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import style from "./Note.module.css";
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { useNotesDispatch } from "../NoteContext";
-
+import EditNoteDialog from "./EditNoteDialog";
+import NoteModal from "./NoteModal";
 const Note = ({ note, backgroundColor }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -54,15 +55,12 @@ const Note = ({ note, backgroundColor }) => {
     });
     setDialogOpen(false);
   };
-  const paperStyle = {
-    backgroundColor: note.backgroundColor || backgroundColor,
-  };
 
   return (
     <Paper
       elevation={3}
       className={style.noteContainer}
-      style={paperStyle}
+      style={{ backgroundColor: note.backgroundColor || backgroundColor }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleOpenDialog}
@@ -81,62 +79,22 @@ const Note = ({ note, backgroundColor }) => {
         </div>
       )}
 
-      <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <div className={style.modalContent}>
-          <Typography variant="h6">Note Deletion</Typography>
-          <Typography>Are you certain you wish to delete this note?</Typography>
-          <div className={style.buttonsContainer}>
-            <Button
-              variant="contained"
-              color="grey"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCloseModal();
-              }}
-              className={style.cancelButton}
-            >
-              Close
-            </Button>
-            <Button
-              variant="contained"
-              color="grey"
-              onClick={handleDeleteNote}
-              className={style.deleteButton}
-            >
-              Delete
-            </Button>
-          </div>
-        </div>
-      </Modal>
-
-      <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
-        <div className={style.dialogContent}>
-          <input
-            type="text"
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-            className={style.titleInput}
-          />
-          <input
-            type="text"
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
-            className={style.contentInput}
-          />
-          <p className={style.taskDate}>{note.date}</p>
-          <div className={style.buttonsContainer}>
-            <Button
-              onClick={handleCloseDialog}
-              className={style.cancelEditionButton}
-            >
-              Cancel
-            </Button>
-            <Button onClick={handleUpdateNote} className={style.doneButton}>
-              Done
-            </Button>
-          </div>
-        </div>
-      </Dialog>
+      <NoteModal
+        isModalOpen={isModalOpen}
+        handleCloseModal={handleCloseModal}
+        handleDeleteNote={handleDeleteNote}
+        note={note}
+      />
+      <EditNoteDialog
+        isDialogOpen={isDialogOpen}
+        handleCloseDialog={handleCloseDialog}
+        editedTitle={editedTitle}
+        setEditedTitle={setEditedTitle}
+        editedContent={editedContent}
+        setEditedContent={setEditedContent}
+        handleUpdateNote={handleUpdateNote}
+        note={note}
+      />
     </Paper>
   );
 };
