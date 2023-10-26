@@ -34,6 +34,10 @@ const NoteForm = () => {
   };
 
   const handleSaveClick = () => {
+    if (title.trim() === "" || content.trim() === "") {
+      setExpanded(false);
+      return;
+    }
     const currentDate = new Date();
     const id = generateUniqueId();
     dispatch({
