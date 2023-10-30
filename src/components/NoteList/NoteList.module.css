@@ -1,0 +1,6 @@
+.notesContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 40px;
+    margin-top: 1.5%;
+  }

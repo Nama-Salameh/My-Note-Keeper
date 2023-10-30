@@ -1,0 +1,11 @@
+.searchBar {
+  width: 25%;
+  color: rgba(106, 106, 106, 0.527);
+  border: none !important;
+  outline: none !important;
+}
+.searchBar input {
+  
+  height: 10px;
+  padding-left: 1%;
+}
